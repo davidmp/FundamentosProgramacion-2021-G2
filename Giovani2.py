@@ -1,1 +1,0 @@
-buenos dias compañeros
