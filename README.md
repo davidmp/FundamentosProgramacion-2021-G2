@@ -5,10 +5,10 @@
     3  python EstSecuencial/CalcPromFinal.py 
     4  history
 # commandos para trabajar con github
-  git status
-  git add -A .
-  git status
-  git commit -a -m "Mensaje"
-  git status
-  git pull
-  git push
+    git status
+    git add -A .
+    git status
+    git commit -a -m "Mensaje"
+    git status
+    git pull
+    git push
