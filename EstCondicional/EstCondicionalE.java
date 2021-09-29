@@ -19,6 +19,9 @@ public class EstCondicionalE{
     System.out.println("El pago a realizar es:"+pago);
   }
 
+
+
+
   public static void main(String[] args) {    
     System.out.println("Hello World");   
     ventaLapices();
