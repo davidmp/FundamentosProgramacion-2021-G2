@@ -28,6 +28,7 @@ static void algoritmoRegalos(){
   System.out.println("Ud. puede elegir los siguientes: "+ regalo);
 }
 
+
 static void pagoPolizas(){
   //Declarar Variebles
   String plan, alcohol, lentes, enfermedad;
