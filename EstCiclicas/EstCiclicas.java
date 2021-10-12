@@ -47,10 +47,26 @@ public class EstCiclicas{
     System.out.println("El faltorial de "+n+"  es:"+resulF);
   }
 
+  static void menuOpciones(){
+    int opcion=0;
+    String msg="Eliga el algoritmo que desea probar\n 1=ssss\n2=Factorial";
+    System.out.println(msg);
+    opcion=sc.nextInt();
+
+    while(opcion!=0){
+        switch(opcion){
+            case 1: contarNumMenorCeroMayorCeroWhile(); break;
+            case 2:  factorial(); break;
+           // case 3:  mesdelAnho(); break;
+            default: System.out.println("Opcion no existe!");
+        }
+      System.out.println(msg);
+      opcion=sc.nextInt();    
+    }
+  }
 
   public static void main(String [] arg){
-    //contarNumMenorCeroMayorCeroWhile();
-    factorial();
+    menuOpciones();
   }
 
 
