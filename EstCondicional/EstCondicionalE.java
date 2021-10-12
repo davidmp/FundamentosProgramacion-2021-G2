@@ -1,6 +1,6 @@
 
+import java.util.Scanner;
 
-import java.util.Scanner; 
 public class EstCondicionalE{
   static Scanner sc = new Scanner(System.in);
 

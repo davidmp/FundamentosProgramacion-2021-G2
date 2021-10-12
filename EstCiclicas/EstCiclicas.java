@@ -1,8 +1,10 @@
 import java.util.Scanner;
 import java.util.Random;
 public class EstCiclicas{  
-    static Scanner sc=new Scanner(System.in);//para leer    valores del teclado
+    static Scanner sc=new Scanner(System.in);
+    //para leer    valores del teclado
     static final Random generator = new Random();
+    
     public static int random(int min, int max) {
         return min + (generator.nextInt() * (max - min));
     }
