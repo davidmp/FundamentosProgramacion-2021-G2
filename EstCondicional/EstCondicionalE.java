@@ -1,3 +1,5 @@
+
+
 import java.util.Scanner; 
 public class EstCondicionalE{
   static Scanner sc = new Scanner(System.in);
@@ -17,10 +19,8 @@ public class EstCondicionalE{
     }
     //Datos de Salida
     System.out.println("El pago a realizar es:"+pago);
+
   }
-
-
-
 
   public static void main(String[] args) {    
     System.out.println("Hello World");   
@@ -29,3 +29,4 @@ public class EstCondicionalE{
   }
   
 }
+
