@@ -10,6 +10,9 @@ public class EstCiclicas{
     public static int random(int min, int max) {
         return min + (generator.nextInt() * (max - min));
     }
+
+
+    
     static void contarNumMenorCeroMayorCeroWhile(){
       //Declarar Variables
       int numMenEqCero=0, numMayCero=0, numeroN, cantNum;
