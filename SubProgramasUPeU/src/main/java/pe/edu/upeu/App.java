@@ -1,6 +1,7 @@
 package pe.edu.upeu;
 import pe.edu.upeu.modulo.*;
 import java.util.Scanner;
+import pe.edu.upeu.util.*;
 /**
  * Hello world!
  *
@@ -10,6 +11,7 @@ public class App {
     static SubProgramas sp=new SubProgramas();
     static Recursividad re=new Recursividad();
     static Scanner sc=new Scanner(System.in);
+    static LeerTeclado lt=new LeerTeclado();
 
 static void menuOpciones(){
     int opcion=0;
@@ -25,15 +27,12 @@ static void menuOpciones(){
     while(opcion!=0){
         switch(opcion){
             case 1:
-            System.out.println("Ingrese un numero:");      
-            //long valor=re.factorialBig(sc.nextLong());
-            System.out.println(re.factorialBig(sc.nextLong())); break;
-
-            case 2: System.out.println("Ingrese un numero:"); 
-            System.out.println(re.fibonacci(sc.nextLong()));
+            System.out.println(re.factorialBig(lt.leer(0, "Ingrese un numero"))); break;
+            case 2:
+            System.out.println(re.fibonacci(lt.leer(0, "Ingrese un numero")));
             break;
-            case 3: System.out.println("Ingrese un numero:"); 
-            System.out.println(re.fibonacciBig(sc.nextLong()));
+            case 3:
+            System.out.println(re.fibonacciBig(lt.leer(0, "Ingrese un numero")));
             break;            
 
             default: System.out.println("Opcion no existe!");
