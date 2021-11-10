@@ -5,7 +5,6 @@ gitl# Compiled Object files
 target
 *.class
 
-
 # Compiled Dynamic libraries
 *.so
 *.dylib
