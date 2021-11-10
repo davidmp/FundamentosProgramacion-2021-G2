@@ -3,6 +3,8 @@ gitl# Compiled Object files
 *.o
 *.obj
 target
+*.class
+
 
 # Compiled Dynamic libraries
 *.so
