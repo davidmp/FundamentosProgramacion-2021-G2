@@ -99,6 +99,39 @@ public class ArreglosVM {
         }
     }
 
+    public static void transpuestaMatriz() {
+        int[][] matriz={
+                    {1,2,3,4},
+                    {5,6,7,8},
+                    {9,10,11,12},
+                    {13,14,15,16}
+                };
+        System.out.println("Transpuesta de una Matriz:");
+
+        int[][] matrizT=new int[matriz[0].length][matriz.length];
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz.length; j++) {
+                matrizT[j][i]=matriz[i][j];
+            }
+        }
+        // 
+        System.out.println("print matriz original:");
+        for (int[] filaDato : matriz) {
+            for (int columDato : filaDato) {
+                System.out.print(columDato+"\t");
+            }
+            System.err.println("");
+        }        
+        System.out.println("print matriz Transpuesta:");
+        for (int[] filaDato : matrizT) {
+            for (int columDato : filaDato) {
+                System.out.print(columDato+"\t");
+            }
+            System.err.println("");
+        }        
+        
+    }
+
     public static void main(String[] args) {
        /* String[] nombVect;
         nombVect=new String[5];
@@ -106,7 +139,8 @@ public class ArreglosVM {
 
         System.out.println(nombVect[0]);*/
        // ejemploBasicoVectores();
-       ejemploBasicoMatrices();
+       //ejemploBasicoMatrices();
+       transpuestaMatriz();
     }
     
 }
