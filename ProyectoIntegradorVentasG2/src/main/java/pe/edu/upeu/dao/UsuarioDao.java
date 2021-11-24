@@ -24,6 +24,20 @@ public void registrarNuevoUsuario() {
     agregarContenido(leerArch, userTO);
 }
 
+public void listarUsuarios(){
+    leerArch=new LeerArchivo(TABLE_USER);
+    Object[][] data=listarContenido(leerArch);
+    util.pintarLine('H', 20);
+    util.pintarTextHeadBody('H', 3, "Usuario,Password,Perfil");
+    System.out.println("");
+    util.pintarLine('H', 20);
+    String dataPrint="";
+    for (int i = 0; i < data.length; i++) {
+        dataPrint=data[i][0]+","+data[i][1]+","+data[i][2];
+        util.pintarTextHeadBody('B', 3, dataPrint); 
+    }
+    util.pintarLine('H', 20);
+}
 
 
 }

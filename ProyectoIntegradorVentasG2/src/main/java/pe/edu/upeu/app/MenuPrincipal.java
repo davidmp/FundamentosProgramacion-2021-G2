@@ -19,7 +19,11 @@ public class MenuPrincipal {
                     userDao=new UsuarioDao();
                     userDao.registrarNuevoUsuario();
                  }
-                break;             
+                break;
+                case 2:{
+                    userDao=new UsuarioDao();
+                    userDao.listarUsuarios();
+                } break;             
                 default: System.out.println("Opcion no existe!");
             }        
           opcion=leer.leer(0,msg);
