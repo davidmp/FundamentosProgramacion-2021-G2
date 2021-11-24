@@ -15,8 +15,13 @@ LeerArchivo leerArch;
 UsuarioTO userTO;
 final String TABLE_USER="Usuario.txt";
 
-public void registrarNuevoUsuario() {
+public void registrarNuevoUsuario() {    
+    userTO=new UsuarioTO();
+    userTO.setUsuario(leerTecla.leer("", "Ingrese un usuario"));
+    userTO.setPassword(leerTecla.leer("", "Ingrese una contraseña"));
+    userTO.setPerfil(leerTecla.leer("", "Ingrese un perfil (VENDEDOR/ADMINISTRADOR)"));
     leerArch=new LeerArchivo(TABLE_USER);
+    agregarContenido(leerArch, userTO);
 }
 
 

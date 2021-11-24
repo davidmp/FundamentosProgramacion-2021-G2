@@ -6,9 +6,6 @@ import pe.edu.upeu.util.LeerTeclado;
 public class MenuPrincipal {
     LeerTeclado leer=new LeerTeclado();
     UsuarioDao userDao;
-
-    public MenuPrincipal(){ menuMain();  }
-
     public void menuMain() {
         int opcion=0;
         System.out.println("================Bienvenidos al Sistema============");
