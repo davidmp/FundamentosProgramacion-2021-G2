@@ -1,11 +1,30 @@
 package pe.edu.upeu.app;
 
+
 import pe.edu.upeu.dao.UsuarioDao;
 import pe.edu.upeu.util.LeerTeclado;
+import pe.edu.upeu.util.UtilsX;
 
 public class MenuPrincipal {
     LeerTeclado leer=new LeerTeclado();
     UsuarioDao userDao;
+    UtilsX util=new UtilsX();
+
+
+    public void mainLogin() {
+        util.clearConsole();
+        System.out.println("**********************System Autenticate*********************");
+        System.out.println();
+        userDao=new UsuarioDao();
+        if(userDao.login()){
+            menuMain();
+        }else{            
+            System.out.println("Intente Nuevamemnte");
+            mainLogin();
+        }
+    }
+
+
     public void menuMain() {
         int opcion=0;
         System.out.println("================Bienvenidos al Sistema============");
@@ -29,4 +48,5 @@ public class MenuPrincipal {
           opcion=leer.leer(0,msg);
         }        
     }
+
 }

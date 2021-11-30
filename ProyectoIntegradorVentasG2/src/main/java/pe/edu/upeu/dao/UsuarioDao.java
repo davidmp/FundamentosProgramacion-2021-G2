@@ -1,5 +1,7 @@
 package pe.edu.upeu.dao;
 
+import java.io.Console;
+
 import pe.edu.upeu.data.AppCrud;
 import pe.edu.upeu.modelo.UsuarioTO;
 import pe.edu.upeu.util.LeerArchivo;
@@ -37,6 +39,26 @@ public void listarUsuarios(){
         util.pintarTextHeadBody('B', 3, dataPrint); 
     }
     util.pintarLine('H', 20);
+}
+
+public boolean login() {    
+    String usuario=leerTecla.leer("","Usuario");
+    Console cons=System.console();
+    System.out.println("Ingrese su clave:");
+    char[] clave=cons.readPassword();
+    leerArch=new LeerArchivo(TABLE_USER);
+    Object[][] dataUser= buscarContenido(leerArch, 0, usuario);    
+    if(dataUser!=null){
+        if(String.valueOf(dataUser[0][1]).equals(String.valueOf(clave))){
+            return true;
+        }else{
+            System.out.println("La contraseña es incorrecta");
+            return login();
+        }
+    }else{
+        System.out.println("Intenete Nuevamente:");
+        return login();
+    }    
 }
 
 
