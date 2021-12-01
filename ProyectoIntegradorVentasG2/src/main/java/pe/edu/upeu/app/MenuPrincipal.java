@@ -4,6 +4,7 @@ package pe.edu.upeu.app;
 import pe.edu.upeu.dao.MarcaDao;
 import pe.edu.upeu.dao.ProductoDao;
 import pe.edu.upeu.dao.UsuarioDao;
+import pe.edu.upeu.dao.VentasDao;
 import pe.edu.upeu.util.LeerTeclado;
 import pe.edu.upeu.util.UtilsX;
 
@@ -12,6 +13,7 @@ public class MenuPrincipal {
     UsuarioDao userDao;
     MarcaDao marDao;
     ProductoDao proDao;
+    VentasDao ventasDao;
     UtilsX util=new UtilsX();
 
 
@@ -39,7 +41,8 @@ public class MenuPrincipal {
         +"\n41=Crear Producto"    
         +"\n42=Listar Producto"    
         +"\n43=Actualizar Producto"
-        +"\n44=Eliminar Producto";        
+        +"\n44=Eliminar Producto"
+        +"\n50=Registrar Ventas";        
         opcion=leer.leer(0,msg);
         while(opcion!=0){
             switch(opcion){
@@ -71,7 +74,11 @@ public class MenuPrincipal {
                 case 44:{
                     proDao=new ProductoDao();
                     proDao.deleteProducto();
-                } break;                                                 
+                } break;  
+                case 50:{
+                    ventasDao=new VentasDao();
+                    ventasDao.registroVenta();
+                } break;                                                               
                 default: System.out.println("Opcion no existe!");
             }        
           opcion=leer.leer(0,msg);

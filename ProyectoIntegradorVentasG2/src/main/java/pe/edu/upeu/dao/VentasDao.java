@@ -40,7 +40,8 @@ public class VentasDao extends AppCrud{
         if (ventaTO!=null) {
             String opcion="SI";
             do {
-                VentaDetalleTO vdXTo=crearCarritoVenta();
+                mostrarProducto();
+                VentaDetalleTO vdXTo=crearCarritoVenta(ventaTO);
                 opcion=leerTecla.leer("", "Desea agregar productos a carrito de ventas");
             } while (opcion.toUpperCase().equals("SI"));
         }
@@ -61,9 +62,26 @@ public class VentasDao extends AppCrud{
         agregarContenido(leerArch, ventTO);       
         return ventTO;
     }
-    public VentaDetalleTO crearCarritoVenta() {
-        return null;
-    }    
+
+    public VentaDetalleTO crearCarritoVenta(VentaTO vto) {
+        leerArch=new LeerArchivo(TABLE_DETALLE_VENTA);
+        vdTO=new VentaDetalleTO();
+        vdTO.setIdVentaDetalle(generarId(leerArch, 0, "VD", 2));
+        vdTO.setIdVenta(vto.getIdVenta());
+        vdTO.setIdProducto(leerTecla.leer("", "Ingrese Id del Producto a vender"));        
+        leerArch=new LeerArchivo(TABLE_PRODUCTO);
+        Object[][] dataP= buscarContenido(leerArch, 0, vdTO.getIdProducto());
+        double precioP=Double.parseDouble(String.valueOf(dataP[0][6]))+
+        Double.parseDouble(String.valueOf(dataP[0][9]));
+        vdTO.setPrecioUnit(precioP);
+        vdTO.setCantidad(leerTecla.leer(0, "Ingrese cantidad a vender"));
+        vdTO.setDescuento(0);
+        vdTO.setTotalpago((vdTO.getPrecioUnit()*vdTO.getCantidad())-vdTO.getDescuento());
+
+        leerArch=new LeerArchivo(TABLE_DETALLE_VENTA);
+        agregarContenido(leerArch, vdTO);
+        return vdTO;
+    }
 
     public void mostrarProducto() {
         leerArch=new LeerArchivo(TABLE_PRODUCTO);
