@@ -1,5 +1,6 @@
 package pe.edu.upeu.dao;
 
+import pe.edu.upeu.data.AppCrud;
 import pe.edu.upeu.modelo.ClienteTO;
 import pe.edu.upeu.modelo.DescuentoTO;
 import pe.edu.upeu.modelo.ProductoTO;
@@ -9,7 +10,7 @@ import pe.edu.upeu.util.LeerArchivo;
 import pe.edu.upeu.util.LeerTeclado;
 import pe.edu.upeu.util.UtilsX;
 
-public class VentasDao {
+public class VentasDao extends AppCrud{
     LeerTeclado leerTecla=new LeerTeclado();
     UtilsX util=new UtilsX();
     
@@ -38,11 +39,31 @@ public class VentasDao {
     }    
 
     public void mostrarProducto() {
-        
+        leerArch=new LeerArchivo(TABLE_PRODUCTO);
+       Object[][] dataPro= listarContenido(leerArch);
+       for (int i = 0; i < dataPro.length; i++) {
+           System.out.print(dataPro[i][0]+"="+dataPro[i][1]+
+           " (Precio:"+(
+            Double.parseDouble(String.valueOf(dataPro[i][6])) +
+            Double.parseDouble(String.valueOf(dataPro[i][9])))+
+            "/ Stock:"+dataPro[i][7]+")\t ! " );
+       }
+       System.out.println("\n");
     }   
     
-    public String crearCliente() {
-        return "";
+    public String crearCliente(String dni) {
+        leerArch=new LeerArchivo(TABLE_CLIENTE);
+        Object[][] datCli= buscarContenido(leerArch, 0, dni);
+        if(datCli!=null){
+            return dni;
+        }else{
+            leerArch=new LeerArchivo(TABLE_CLIENTE);
+            cliTO=new ClienteTO();
+            cliTO.setDni(dni);
+            cliTO.setNombre(leerTecla.leer("", "Ingrese nombre cliente"));
+            agregarContenido(leerArch, cliTO);
+            return cliTO.getDni();
+        }       
     }        
 
 }
