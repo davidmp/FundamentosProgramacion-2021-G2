@@ -36,20 +36,32 @@ public class VentasDao extends AppCrud{
         
         System.out.println("*******************Venta Zapatillas***************");
         String dni=crearCliente(leerTecla.leer("", "Ingrese el DNI del Cliente"));
+        double igvX=0;
+        double subtotalX=0;
+        double importeTotalX=0;
+
         VentaTO ventaTO=crearVenta(dni);
         if (ventaTO!=null) {
             String opcion="SI";
-            do {
-                mostrarProducto();
+            do {                
                 VentaDetalleTO vdXTo=crearCarritoVenta(ventaTO);
+                importeTotalX+=vdXTo.getTotalpago();
                 opcion=leerTecla.leer("", "Desea agregar productos a carrito de ventas");
             } while (opcion.toUpperCase().equals("SI"));
+            subtotalX=(importeTotalX*100)/118;
+            igvX=subtotalX*0.18;
+
+            leerArch=new LeerArchivo(TABLE_VENTA); 
+            ventaTO.setSubtotal(subtotalX);
+            ventaTO.setIgv(igvX);
+            ventaTO.setImportetotal(importeTotalX);
+            editarRegistro(leerArch, 0, ventTO.getIdVenta(), ventaTO);
         }
         
     }
 
     public VentaTO crearVenta(String dni) {
-        leerArch=new LeerArchivo(TABLE_VENTA);
+        leerArch=new LeerArchivo(TABLE_VENTA);        
         ventTO=new VentaTO();
         ventTO.setIdVenta(generarId(leerArch, 0, "V", 1));
         ventTO.setDni(dni);
@@ -64,6 +76,9 @@ public class VentasDao extends AppCrud{
     }
 
     public VentaDetalleTO crearCarritoVenta(VentaTO vto) {
+        util.clearConsole();
+        System.out.println("====================Carrito de Ventas=====================");
+        mostrarProducto();
         leerArch=new LeerArchivo(TABLE_DETALLE_VENTA);
         vdTO=new VentaDetalleTO();
         vdTO.setIdVentaDetalle(generarId(leerArch, 0, "VD", 2));
