@@ -1,5 +1,8 @@
 package pe.edu.upeu.dao;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import pe.edu.upeu.data.AppCrud;
 import pe.edu.upeu.modelo.ClienteTO;
 import pe.edu.upeu.modelo.DescuentoTO;
@@ -24,10 +27,13 @@ public class VentasDao extends AppCrud{
     final String TABLE_PRODUCTO="Producto.txt";   
     final String TABLE_CLIENTE="Cliente.txt";   
     final String TABLE_VENTA="Venta.txt";   
-    final String TABLE_DETALLE_VENTA="VentaDetalle.txt";     
+    final String TABLE_DETALLE_VENTA="VentaDetalle.txt";  
+    
+    SimpleDateFormat formatofechahora = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    SimpleDateFormat formatofecha = new SimpleDateFormat("dd-MM-yyyy");    
 
     public void registroVenta() {
-        leerArch=new LeerArchivo(TABLE_VENTA);
+        
         System.out.println("*******************Venta Zapatillas***************");
         String dni=crearCliente(leerTecla.leer("", "Ingrese el DNI del Cliente"));
         VentaTO ventaTO=crearVenta(dni);
@@ -35,15 +41,25 @@ public class VentasDao extends AppCrud{
             String opcion="SI";
             do {
                 VentaDetalleTO vdXTo=crearCarritoVenta();
-                
+                opcion=leerTecla.leer("", "Desea agregar productos a carrito de ventas");
             } while (opcion.toUpperCase().equals("SI"));
         }
         
     }
 
     public VentaTO crearVenta(String dni) {
-        
-        return null;
+        leerArch=new LeerArchivo(TABLE_VENTA);
+        ventTO=new VentaTO();
+        ventTO.setIdVenta(generarId(leerArch, 0, "V", 1));
+        ventTO.setDni(dni);
+        ventTO.setFecha(formatofechahora.format(new Date()));
+        ventTO.setUsuario("anonimo");
+        ventTO.setIgv(0);
+        ventTO.setImportetotal(0);
+        ventTO.setSubtotal(0);
+        leerArch=new LeerArchivo(TABLE_VENTA);
+        agregarContenido(leerArch, ventTO);       
+        return ventTO;
     }
     public VentaDetalleTO crearCarritoVenta() {
         return null;
