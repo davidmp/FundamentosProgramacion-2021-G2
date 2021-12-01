@@ -27,10 +27,21 @@ public class VentasDao extends AppCrud{
     final String TABLE_DETALLE_VENTA="VentaDetalle.txt";     
 
     public void registroVenta() {
+        leerArch=new LeerArchivo(TABLE_VENTA);
+        System.out.println("*******************Venta Zapatillas***************");
+        String dni=crearCliente(leerTecla.leer("", "Ingrese el DNI del Cliente"));
+        VentaTO ventaTO=crearVenta(dni);
+        if (ventaTO!=null) {
+            String opcion="SI";
+            do {
+                VentaDetalleTO vdXTo=crearCarritoVenta();
+                
+            } while (opcion.toUpperCase().equals("SI"));
+        }
         
     }
 
-    public VentaTO crearVenta() {
+    public VentaTO crearVenta(String dni) {
         
         return null;
     }
