@@ -46,7 +46,7 @@ public class VentasDao extends AppCrud{
             do {                
                 VentaDetalleTO vdXTo=crearCarritoVenta(ventaTO);
                 importeTotalX+=vdXTo.getTotalpago();
-                opcion=leerTecla.leer("", "Desea agregar productos a carrito de ventas");
+                opcion=leerTecla.leer("", "Desea agregar mas productos a carrito de ventas? SI/NO");
             } while (opcion.toUpperCase().equals("SI"));
             subtotalX=(importeTotalX*100)/118;
             igvX=subtotalX*0.18;
@@ -114,7 +114,7 @@ public class VentasDao extends AppCrud{
     public String crearCliente(String dni) {
         leerArch=new LeerArchivo(TABLE_CLIENTE);
         Object[][] datCli= buscarContenido(leerArch, 0, dni);
-        if(datCli!=null){
+        if(datCli!=null && datCli.length>=1){
             return dni;
         }else{
             leerArch=new LeerArchivo(TABLE_CLIENTE);
