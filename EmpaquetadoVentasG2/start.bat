@@ -1,0 +1,1 @@
+java -jar ProyectoIntegradorVentasG2-1.0-SNAPSHOT.jar
