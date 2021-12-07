@@ -168,12 +168,24 @@ public class VentasDao extends AppCrud{
                     indiceVentorV++;
                 }
             }             
-
+            //Imprimir Reporte
+            System.out.println("============================ Reporte Ventas0 ==========================");
+            System.out.println("************Fecha Inicio:"+fechaInit+" a Fecha Fin:"+fechaFinal+"*********");
+            util.pintarLine('H', 40);
+            util.pintarTextHeadBody('H', 40, "ID,DNI,Fech.Venta,SubTotal, IGV, Imp. Total");
+            System.out.println();
+            util.pintarLine('H', 40);
+            for (VentaTO ventaTO : dataVentas) {
+                String dataXX=ventaTO.getIdVenta()+","+ventaTO.getDni()+","+ventaTO.getFecha()
+                +","+ventaTO.getSubtotal()+","+ventaTO.getIgv()+","+ventaTO.getImportetotal();
+                util.pintarTextHeadBody('B',3,dataXX);
+            }
+            util.pintarLine('H', 40);
 
 
 
         } catch (Exception e) {
-            //TODO: handle exception
+            System.err.println("Error al reportar ventas : "+e.getMessage());
         }
     }
 
