@@ -140,8 +140,8 @@ public class VentasDao extends AppCrud{
                 String[] tempFecha=String.valueOf(datPrev[i][2]).split(" ");
                 Date fechaTemX=formatofecha.parse(tempFecha[0]);
                 if (
-                    (fechaTemX.after(formatofecha.parse(fechaInit)) && tempFecha[0].equals(fechaInit)) && 
-                    (fechaTemX.before(formatofecha.parse(fechaFinal)) && tempFecha[0].equals(fechaFinal))
+                    (fechaTemX.after(formatofecha.parse(fechaInit)) || tempFecha[0].equals(fechaInit)) && 
+                    (fechaTemX.before(formatofecha.parse(fechaFinal)) || tempFecha[0].equals(fechaFinal))
                 ) {
                     cantidadFilas++;
                 }
@@ -153,8 +153,8 @@ public class VentasDao extends AppCrud{
                 String[] tempFecha=String.valueOf(datPrev[i][2]).split(" ");
                 Date fechaTemX=formatofecha.parse(tempFecha[0]);
                 if (
-                    (fechaTemX.after(formatofecha.parse(fechaInit)) && tempFecha[0].equals(fechaInit)) && 
-                    (fechaTemX.before(formatofecha.parse(fechaFinal)) && tempFecha[0].equals(fechaFinal))
+                    (fechaTemX.after(formatofecha.parse(fechaInit)) || tempFecha[0].equals(fechaInit)) && 
+                    (fechaTemX.before(formatofecha.parse(fechaFinal)) || tempFecha[0].equals(fechaFinal))
                 ) {
                     VentaTO vtOX=new VentaTO();
                     vtOX.setIdVenta(String.valueOf(datPrev[i][0]));
@@ -163,7 +163,7 @@ public class VentasDao extends AppCrud{
                     vtOX.setUsuario("Anonimo");
                     vtOX.setSubtotal(Double.parseDouble(String.valueOf(datPrev[i][3])));
                     vtOX.setIgv(Double.parseDouble(String.valueOf(datPrev[i][4])));
-                    vtOX.setImportetotal(Double.parseDouble(String.valueOf(datPrev[i][4])));
+                    vtOX.setImportetotal(Double.parseDouble(String.valueOf(datPrev[i][5])));
                     dataVentas[indiceVentorV]=vtOX;
                     indiceVentorV++;
                 }
@@ -172,17 +172,23 @@ public class VentasDao extends AppCrud{
             System.out.println("============================ Reporte Ventas0 ==========================");
             System.out.println("************Fecha Inicio:"+fechaInit+" a Fecha Fin:"+fechaFinal+"*********");
             util.pintarLine('H', 40);
-            util.pintarTextHeadBody('H', 40, "ID,DNI,Fech.Venta,SubTotal, IGV, Imp. Total");
+            util.pintarTextHeadBody('H', 3, "ID,DNI,Fech.Venta,SubTotal, IGV, Imp. Total");
             System.out.println();
             util.pintarLine('H', 40);
-            for (VentaTO ventaTO : dataVentas) {
-                String dataXX=ventaTO.getIdVenta()+","+ventaTO.getDni()+","+ventaTO.getFecha()
-                +","+ventaTO.getSubtotal()+","+ventaTO.getIgv()+","+ventaTO.getImportetotal();
+            double subtotX=0, igvX=0, impTotX=0;
+            for (VentaTO xx : dataVentas) {
+                String dataXX=xx.getIdVenta()+","+xx.getDni()+","+xx.getFecha()
+                +","+xx.getSubtotal()+","+xx.getIgv()+","+xx.getImportetotal();
+                subtotX+=xx.getSubtotal();
+                igvX+=xx.getIgv();
+                impTotX+=xx.getImportetotal();
                 util.pintarTextHeadBody('B',3,dataXX);
-            }
+            }  //Math.round(double*100.0)/100.0
             util.pintarLine('H', 40);
-
-
+            System.out.println("  Sub. Total: S/."+ (Math.round(subtotX*100.0)/100.0)+
+            "  |  IGV: S/."+(Math.round(igvX*100.0)/100.0)+
+            "   | Imp. Total: S/. "+(Math.round(impTotX*100.0)/100.0));
+            util.pintarLine('H', 40);
 
         } catch (Exception e) {
             System.err.println("Error al reportar ventas : "+e.getMessage());

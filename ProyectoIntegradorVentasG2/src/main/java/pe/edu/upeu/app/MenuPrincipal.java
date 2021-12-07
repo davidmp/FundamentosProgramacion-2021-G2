@@ -42,7 +42,8 @@ public class MenuPrincipal {
         +"\n42=Listar Producto"    
         +"\n43=Actualizar Producto"
         +"\n44=Eliminar Producto"
-        +"\n50=Registrar Ventas";        
+        +"\n50=Registrar Ventas"    
+        +"\n51=Reporte Ventas";        
         opcion=leer.leer(0,msg);
         while(opcion!=0){
             switch(opcion){
@@ -78,7 +79,11 @@ public class MenuPrincipal {
                 case 50:{
                     ventasDao=new VentasDao();
                     ventasDao.registroVenta();
-                } break;                                                               
+                } break;    
+                case 51:{
+                    ventasDao=new VentasDao();
+                    ventasDao.ReporteVentasRangoFecha();
+                } break;                                                                               
                 default: System.out.println("Opcion no existe!");
             }        
           opcion=leer.leer(0,msg);
