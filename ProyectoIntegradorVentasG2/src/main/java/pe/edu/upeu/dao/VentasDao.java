@@ -2,6 +2,7 @@ package pe.edu.upeu.dao;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ListIterator;
 
 import pe.edu.upeu.data.AppCrud;
 import pe.edu.upeu.modelo.ClienteTO;
@@ -125,5 +126,56 @@ public class VentasDao extends AppCrud{
             return cliTO.getDni();
         }       
     }        
+
+    public void ReporteVentasRangoFecha() {
+        
+        util.clearConsole();
+        leerArch=new LeerArchivo(TABLE_VENTA);
+        Object[][] datPrev= listarContenido(leerArch);
+        String fechaInit=leerTecla.leer("", "Ingrese Fecha Inicio");
+        String fechaFinal=leerTecla.leer("", "Ingrese Fecha Fin");
+        int cantidadFilas=0;
+        try { //Leer ventas y saber cuantos coinciden eon el rango de fechas
+            for (int i = 0; i < datPrev.length; i++) {
+                String[] tempFecha=String.valueOf(datPrev[i][2]).split(" ");
+                Date fechaTemX=formatofecha.parse(tempFecha[0]);
+                if (
+                    (fechaTemX.after(formatofecha.parse(fechaInit)) && tempFecha[0].equals(fechaInit)) && 
+                    (fechaTemX.before(formatofecha.parse(fechaFinal)) && tempFecha[0].equals(fechaFinal))
+                ) {
+                    cantidadFilas++;
+                }
+            }  
+            // pasar la data a la nueva matriz
+            VentaTO[] dataVentas=new VentaTO[cantidadFilas];
+            int indiceVentorV=0;
+            for (int i = 0; i < datPrev.length; i++) {
+                String[] tempFecha=String.valueOf(datPrev[i][2]).split(" ");
+                Date fechaTemX=formatofecha.parse(tempFecha[0]);
+                if (
+                    (fechaTemX.after(formatofecha.parse(fechaInit)) && tempFecha[0].equals(fechaInit)) && 
+                    (fechaTemX.before(formatofecha.parse(fechaFinal)) && tempFecha[0].equals(fechaFinal))
+                ) {
+                    VentaTO vtOX=new VentaTO();
+                    vtOX.setIdVenta(String.valueOf(datPrev[i][0]));
+                    vtOX.setDni(String.valueOf(datPrev[i][1]));
+                    vtOX.setFecha(String.valueOf(datPrev[i][2]));
+                    vtOX.setUsuario("Anonimo");
+                    vtOX.setSubtotal(Double.parseDouble(String.valueOf(datPrev[i][3])));
+                    vtOX.setIgv(Double.parseDouble(String.valueOf(datPrev[i][4])));
+                    vtOX.setImportetotal(Double.parseDouble(String.valueOf(datPrev[i][4])));
+                    dataVentas[indiceVentorV]=vtOX;
+                    indiceVentorV++;
+                }
+            }             
+
+
+
+
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
+    }
+
 
 }
