@@ -4,6 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ListIterator;
 
+import org.fusesource.jansi.Ansi;
+import org.fusesource.jansi.AnsiConsole;
+
 import pe.edu.upeu.data.AppCrud;
 import pe.edu.upeu.modelo.ClienteTO;
 import pe.edu.upeu.modelo.DescuentoTO;
@@ -167,9 +170,12 @@ public class VentasDao extends AppCrud{
                     dataVentas[indiceVentorV]=vtOX;
                     indiceVentorV++;
                 }
-            }             
+            } 
+            AnsiConsole.systemInstall();  
+            Ansi color=new Ansi();   
+            
             //Imprimir Reporte
-            System.out.println("============================ Reporte Ventas0 ==========================");
+            System.out.println(color.render("@|blue ============================ Reporte Ventas ==========================|@"));
             System.out.println("************Fecha Inicio:"+fechaInit+" a Fecha Fin:"+fechaFinal+"*********");
             util.pintarLine('H', 40);
             util.pintarTextHeadBody('H', 3, "ID,DNI,Fech.Venta,SubTotal, IGV, Imp. Total");
@@ -185,9 +191,11 @@ public class VentasDao extends AppCrud{
                 util.pintarTextHeadBody('B',3,dataXX);
             }  //Math.round(double*100.0)/100.0
             util.pintarLine('H', 40);
-            System.out.println("  Sub. Total: S/."+ (Math.round(subtotX*100.0)/100.0)+
-            "  |  IGV: S/."+(Math.round(igvX*100.0)/100.0)+
-            "   | Imp. Total: S/. "+(Math.round(impTotX*100.0)/100.0));
+            color=new Ansi();   
+            //System.out.println(color.render("@|blue Holasss |@ @|green VErsdsd |@  "));       
+            System.out.println(color.render("@|red Sub. Total: S/.|@ @|green "+ (Math.round(subtotX*100.0)/100.0)+
+            "|@ | @|blue IGV: S/.|@ @|green "+(Math.round(igvX*100.0)/100.0)+
+            "|@ |  @|blue Imp. Total: S/. |@ @|green "+(Math.round(impTotX*100.0)/100.0)+"|@"));
             util.pintarLine('H', 40);
 
         } catch (Exception e) {
