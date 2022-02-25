@@ -138,7 +138,7 @@ public class VentasDao extends AppCrud{
         String fechaInit=leerTecla.leer("", "Ingrese Fecha Inicio");
         String fechaFinal=leerTecla.leer("", "Ingrese Fecha Fin");
         int cantidadFilas=0;
-        try { //Leer ventas y saber cuantos coinciden eon el rango de fechas
+        try { //Leer ventas y saber cuantos coinciden con el rango de fechas
             for (int i = 0; i < datPrev.length; i++) {
                 String[] tempFecha=String.valueOf(datPrev[i][2]).split(" ");
                 Date fechaTemX=formatofecha.parse(tempFecha[0]);

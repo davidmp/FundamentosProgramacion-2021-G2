@@ -37,7 +37,6 @@ public class MenuPrincipal {
         String msg="Seleccione una opción"+
         "\n11=Nuevo Usuario"    
         +"\n12=Listar Usuario"
-        +"\n31=Crear Marca"    
         +"\n41=Crear Producto"    
         +"\n42=Listar Producto"    
         +"\n43=Actualizar Producto"
@@ -56,10 +55,7 @@ public class MenuPrincipal {
                     userDao=new UsuarioDao();
                     userDao.listarUsuarios();
                 } break;  
-                case 31:{
-                    marDao=new MarcaDao();
-                    marDao.createMarca();
-                } break;                  
+                                 
                 case 41:{
                     proDao=new ProductoDao();
                     proDao.createProducto();

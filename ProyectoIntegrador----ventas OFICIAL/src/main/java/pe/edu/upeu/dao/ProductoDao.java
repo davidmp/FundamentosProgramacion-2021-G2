@@ -25,12 +25,9 @@ public class ProductoDao extends AppCrud{
         prodTO.setIdMarca(leerTecla.leer("", "Ingrese Id de marca"));
         prodTO.setNombre(leerTecla.leer("", "Ingrese nombre producto"));
         prodTO.setTalla(leerTecla.leer(0, "Ingrese talla"));
-        prodTO.setGenero(leerTecla.leer("","Ingrese genero"));
         prodTO.setTipo(leerTecla.leer("", "Ingrese el tipo"));
-        prodTO.setUnidmed(leerTecla.leer("", "Ingrese la Unidad Med."));
         prodTO.setPreciounit(leerTecla.leer(0.0, "Ingrese el precio Unit"));
-        prodTO.setStock(leerTecla.leer(0, "Ingrese Stock del Producto"));
-        prodTO.setUtilidad(leerTecla.leer(0.0, "Ingrese la Utilidad"));                        
+        prodTO.setStock(leerTecla.leer(0, "Ingrese Stock "));                        
         leerArch=new LeerArchivo(TABLE_PRODUCTO);
         agregarContenido(leerArch, prodTO);
 
@@ -40,7 +37,7 @@ public class ProductoDao extends AppCrud{
         leerArch=new LeerArchivo(TABLE_PRODUCTO);
         Object[][] dataPro= listarContenido(leerArch);
         util.pintarLine('H', 20);
-        util.pintarTextHeadBody('H', 3, "Id,Nombre,stock");
+        util.pintarTextHeadBody('H', 3, "Id,Nombre ,stock");
         System.out.println("");
         util.pintarLine('H', 20);
         String dataPrint="";
@@ -58,7 +55,6 @@ public class ProductoDao extends AppCrud{
         reportProducto();
         String idProd=leerTecla.leer("", "Ingrese el Id del Producto");
         prodTO=new ProductoTO();
-        prodTO.setUtilidad(leerTecla.leer(0.0, "Ingrese la nueva U-tilidad"));
         prodTO.setPreciounit(leerTecla.leer(0.0, "Ingrese el nuevo prec. unitario"));
         prodTO.setStock(leerTecla.leer(0, "Ingrese el nuevo stock"));
         leerArch=new LeerArchivo(TABLE_PRODUCTO);

@@ -1,0 +1,2 @@
+P2	Zapatilla nike  35	Mujer y Hombre	Zapatilla	M1	88.0	16	Unidad	10.0
+P3	zapatilla nike	36	Mujer y Hombre	Zapatilla	M1	80.0	15	Unidad

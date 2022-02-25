@@ -1,3 +1,0 @@
-davidmp	123456	ADMINISTRADOR
-jaimito	123456	VENDEDOR
-pedrito	pedro123	VENDEDOR
